@@ -26,11 +26,18 @@ class Query(BaseModel):
 
 def parse_pdf(data):
     worker = Path(__file__).with_name("pdf_worker.py").resolve()
+    command = [sys.executable, "-I", str(worker)]
+    environment = {}
+    if getattr(sys, "frozen", False) and sys.platform == "win32":
+        command = [sys.executable, "--pdf-worker"]
+        # Reuse the one-file bootloader's extraction directory. Pass no user credentials.
+        environment = {k: v for k, v in os.environ.items()
+                       if k.startswith("_PYI_") or k.upper() in {"SYSTEMROOT", "WINDIR", "TEMP", "TMP"}}
     with tempfile.TemporaryDirectory() as directory:
         try:
-            result = subprocess.run([sys.executable, "-I", str(worker)], input=data,
+            result = subprocess.run(command, input=data,
                                     stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                                    env={}, cwd=directory, timeout=15, check=False)
+                                    env=environment, cwd=directory, timeout=15, check=False)
         except subprocess.TimeoutExpired:
             raise HTTPException(422, "PDF processing limit exceeded") from None
     if result.returncode == 5:

@@ -1,0 +1,26 @@
+name: Windows desktop
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install packaging dependencies
+        run: py -3.12 -m pip install -r requirements.txt pyinstaller==6.16.0
+      - name: Build the standalone launcher
+        run: >
+          py -3.12 -m PyInstaller --onefile --console --name Aegis
+          --paths . --add-data "aegis/ui:aegis/ui" --collect-all pypdf
+          --collect-submodules uvicorn desktop/launcher.py
+      - name: Upload, query, and reopen the packaged workspace
+        run: py -3.12 -m desktop.smoke dist/Aegis.exe
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: Aegis-Windows-x64
+          path: dist/Aegis.exe
+          if-no-files-found: error
