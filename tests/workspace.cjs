@@ -9,7 +9,7 @@ async function run() {
     const page = await browser.newPage();
     await page.goto("http://127.0.0.1:8000/");
     await page.locator("#key").fill(fixture[0]);
-    await page.getByText("Unlock workspace").click();
+    await page.getByRole("button", {name:"Unlock workspace", exact:true}).click();
     await page.locator("#pdf").setInputFiles({name:"workspace-test.pdf",mimeType:"application/pdf",buffer:Buffer.from(fixture[1],"base64")});
     await page.getByRole("button",{name:"Upload PDF"}).click();
     await page.getByText("PDF ready.").waitFor();
@@ -17,8 +17,8 @@ async function run() {
     await page.getByText("Find evidence").click();
     await page.locator("#result strong").filter({hasText:"Page 2"}).first().waitFor();
     await page.locator("blockquote").filter({hasText:"45 days"}).first().waitFor();
-    await page.getByText("Lock workspace").click();
-    await page.getByText("Unlock workspace").waitFor();
+    await page.getByRole("button", {name:"Lock workspace", exact:true}).click();
+    await page.getByRole("button", {name:"Unlock workspace", exact:true}).waitFor();
   } finally { await browser.close(); }
 }
 run().catch(error => { console.error(error.message); process.exitCode=1; });
