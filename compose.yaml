@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: aegis
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?run setup_env.py first}
+      AEGIS_DB_PASSWORD: ${AEGIS_DB_PASSWORD:?run setup_env.py first}
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./infra/init-db.sh:/docker-entrypoint-initdb.d/10-aegis.sh:ro
+    networks: [database]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d aegis"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  api:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      AEGIS_KEYS: ${AEGIS_KEYS:?run setup_env.py first}
+      AEGIS_DATABASE: postgresql://aegis_app:${AEGIS_DB_PASSWORD}@db/aegis
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true
+    tmpfs: ["/tmp:size=32m,mode=1777,noexec,nosuid,nodev"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 768m
+    pids_limit: 80
+    networks: [database, frontend]
+networks:
+  database:
+    internal: true
+  frontend: {}
+volumes:
+  database: {}

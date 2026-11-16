@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<'SQL'
+\getenv app_password AEGIS_DB_PASSWORD
+CREATE ROLE aegis_app LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE PASSWORD :'app_password';
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+GRANT USAGE, CREATE ON SCHEMA public TO aegis_app;
+SQL

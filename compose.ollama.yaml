@@ -1,0 +1,13 @@
+services:
+  api:
+    environment:
+      AEGIS_MODEL: ${AEGIS_MODEL:?set AEGIS_MODEL in .env}
+  ollama:
+    image: ollama/ollama:latest
+    network_mode: service:api
+    environment:
+      OLLAMA_HOST: "127.0.0.1:11434"
+    volumes:
+      - models:/root/.ollama
+volumes:
+  models: {}

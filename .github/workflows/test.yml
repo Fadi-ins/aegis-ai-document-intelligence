@@ -1,0 +1,34 @@
+name: Verify Aegis
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Generate disposable credentials
+        run: python3 scripts/setup_env.py
+      - name: Build and start PostgreSQL and API
+        run: docker compose up --build -d --wait
+      - name: Test SQLite
+        run: docker compose run --rm -v "$PWD/tests:/srv/tests:ro" api python -m unittest discover -v
+      - name: Test PostgreSQL
+        run: docker compose run --rm -v "$PWD/tests:/srv/tests:ro" api sh -ec 'TEST_DATABASE="$AEGIS_DATABASE" python -m unittest discover -v'
+      - name: Exercise the running HTTP service
+        run: |
+          docker compose exec -T api python -m aegis.demo > /tmp/aegis-demo.json
+          python3 - <<'PY'
+          import json
+          with open("/tmp/aegis-demo.json") as handle:
+              result = json.load(handle)
+          assert result["status"] == "matching_passages"
+          assert result["citations"][0]["page"] == 2
+          assert "45 days" in result["citations"][0]["quote"]
+          PY
+      - name: Remove disposable database
+        if: always()
+        run: docker compose down -v
