@@ -1,6 +1,12 @@
 # Aegis AI
 A local-first document evidence API built with FastAPI. Upload a text PDF, select the documents a question may use, and retrieve quotations with one-based PDF page numbers. Optionally, ask a local Ollama model to select the quotations that answer the question.
 
+## Windows desktop app
+
+Download the **Aegis-Windows-x64** ZIP from a successful **Windows desktop** Actions run. Extract it and double-click **Aegis.exe**. The executable bundles Python, the API and the browser interface. It opens your default browser, then you paste the session access key from the Aegis window. Keep that window open while using the app. Press Ctrl+C there to stop it.
+
+Each Windows profile stores its own documents in `%LOCALAPPDATA%\Aegis\documents.sqlite3`. Documents persist across launches. Each launch generates a fresh access key and binds a port on 127.0.0.1. If the browser does not open, copy the displayed local address. The app uses the existing Windows native PDF profile for trusted PDFs. For unfamiliar or potentially hostile files, use the Docker profile below for Linux parser isolation.
+
 ## Try it with Docker
 Install Docker with Compose and Python 3.12. From the repository root run:
 
