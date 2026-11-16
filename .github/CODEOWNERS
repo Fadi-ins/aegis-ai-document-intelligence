@@ -1,0 +1,7 @@
+/.github/ @Fadi-ins
+/Dockerfile @Fadi-ins
+/compose*.yaml @Fadi-ins
+/infra/ @Fadi-ins
+/requirements*.txt @Fadi-ins
+/aegis/gateway.py @Fadi-ins
+/aegis/pdf_worker.py @Fadi-ins
