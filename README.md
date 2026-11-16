@@ -10,6 +10,8 @@ docker compose up --build -d --wait
 docker compose exec api python -m aegis.demo
 ```
 
+Open **http://127.0.0.1:8000/** in your browser. Unlock the workspace with the value for `local` inside `AEGIS_KEYS` from your local `.env` file. Upload a PDF, select the sources and enter a question. Locking the workspace clears the access key from the page.
+
 The demo generates a two-page handbook, uploads it to the running API and asks about archive retention. The response should include page 2 and the quotation “The archive retention period is 45 days.” Repeating the demo with the same PDF bytes and key reuses its document ID. The API listens on 127.0.0.1:8000. PostgreSQL uses a named volume and has no published port. Stop the services with `docker compose down`.
 
 ## Use an installed Ollama model on Windows
@@ -66,4 +68,4 @@ python -m unittest discover -v
 Run from an environment with `requirements.txt` installed. Native Linux also needs `libseccomp2`. Tests use temporary SQLite databases by default. Setting `TEST_DATABASE` to a disposable PostgreSQL DSN runs the same tests against PostgreSQL with `requirements-postgres.txt` installed. The suite uses real PDFs and a controlled Ollama HTTP transport to exercise quote selection, abstention and outages. The GitHub Actions workflow builds the container, runs both database profiles and checks a live HTTP request.
 
 ## Next milestone
-Build a labeled retrieval benchmark, then add pgvector embeddings alongside the existing full-text baseline. Measure evidence recall at five passages and citation relevance before introducing reranking or claim-level contradiction detection. The initial release exposes an API and a runnable demo.
+Build a labeled retrieval benchmark, then add pgvector embeddings alongside the existing full-text baseline. Measure evidence recall at five passages and citation relevance before introducing reranking or claim-level contradiction detection. The initial release includes a browser workspace, API and runnable demo.

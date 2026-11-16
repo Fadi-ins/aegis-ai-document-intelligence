@@ -10,7 +10,7 @@ from uuid import UUID
 import httpx
 from fastapi import FastAPI, File, HTTPException, Request, Response, UploadFile
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from .answers import answer, keywords
@@ -53,6 +53,25 @@ def make_app(store, keys, model=None, transport=None):
     @app.get("/api/v1/health/live")
     def health():
         return {"status": "ok"}
+
+    ui = Path(__file__).with_name("ui")
+
+    @app.get("/", include_in_schema=False)
+    def workspace():
+        return FileResponse(ui / "index.html", headers={"Content-Security-Policy":
+            "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"})
+
+    @app.get("/workspace.css", include_in_schema=False)
+    def stylesheet():
+        return FileResponse(ui / "workspace.css")
+
+    @app.get("/workspace.js", include_in_schema=False)
+    def javascript():
+        return FileResponse(ui / "workspace.js", media_type="text/javascript")
+
+    @app.get("/api/v1/documents")
+    def list_documents(request: Request):
+        return store.list_documents(request.state.owner)
 
     @app.post("/api/v1/documents", status_code=201)
     def upload(request: Request, response: Response, file: UploadFile = File()):

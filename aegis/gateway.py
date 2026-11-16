@@ -37,7 +37,8 @@ class Gateway:
                 extra["WWW-Authenticate"] = "Bearer"
             await JSONResponse({"detail": detail}, code, headers=extra)(scope, receive, send)
 
-        public = scope["method"] == "GET" and scope["path"] == "/api/v1/health/live"
+        public = scope["method"] == "GET" and scope["path"] in {
+            "/", "/workspace.css", "/workspace.js", "/api/v1/health/live"}
         if not public:
             auth = headers.getlist("authorization")
             token = auth[0].split(" ", 1) if len(auth) == 1 else []

@@ -52,6 +52,11 @@ class Store:
                 db.execute("""CREATE TRIGGER IF NOT EXISTS passage_delete AFTER DELETE ON passages
                     BEGIN DELETE FROM passage_fts WHERE id=old.id; END""")
 
+    def list_documents(self, owner):
+        with self.connect() as db:
+            rows = self.execute(db, "SELECT id, filename, pages FROM documents WHERE owner=? ORDER BY filename, id", (owner,))
+            return [dict(row) for row in rows]
+
     def save(self, owner, filename, data, parsed):
         digest = sha256(data).hexdigest()
         with self.connect() as db:

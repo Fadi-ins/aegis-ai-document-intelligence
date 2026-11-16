@@ -29,6 +29,10 @@ jobs:
           assert result["citations"][0]["page"] == 2
           assert "45 days" in result["citations"][0]["quote"]
           PY
+      - name: Exercise the browser workspace
+        run: |
+          npm install --prefix "$RUNNER_TEMP/aegis-ui" --ignore-scripts --no-audit playwright@1.56.1
+          NODE_PATH="$RUNNER_TEMP/aegis-ui/node_modules" node tests/workspace.cjs
       - name: Remove disposable database
         if: always()
         run: docker compose down -v

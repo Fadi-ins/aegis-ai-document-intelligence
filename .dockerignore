@@ -2,3 +2,5 @@
 !requirements*.txt
 !aegis/
 !aegis/*.py
+!aegis/ui/
+!aegis/ui/*
