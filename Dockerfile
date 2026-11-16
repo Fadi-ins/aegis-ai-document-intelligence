@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.15-slim
 WORKDIR /srv
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y --no-install-recommends libseccomp2 zlib1g && rm -rf /var/lib/apt/lists/*
