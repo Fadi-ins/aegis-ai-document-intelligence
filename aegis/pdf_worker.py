@@ -43,7 +43,8 @@ def restrict_linux_worker():
 def main():
     import codecs
     import io
-    from pypdf import PdfReader
+    # PdfReader loads these modules lazily. Load trusted parser code before seccomp.
+    from pypdf import PdfReader, filters, xmp
 
     # Load common PDF text codecs before closing filesystem access.
     for encoding in ("utf-16-be", "utf-16-le", "utf-8", "cp1252", "mac_roman",
