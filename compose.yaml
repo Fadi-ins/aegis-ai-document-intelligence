@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:17-bookworm
+    image: postgres:18-bookworm
     environment:
       POSTGRES_DB: aegis
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?run setup_env.py first}
