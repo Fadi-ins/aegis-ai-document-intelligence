@@ -54,6 +54,8 @@ if __name__ == "__main__":
     options = parser.parse_args()
     try:
         launch(not options.no_browser)
+    except KeyboardInterrupt:
+        pass
     except Exception as error:
         print(f"Aegis could not start: {error}", file=sys.stderr, flush=True)
         if sys.stdin.isatty():
