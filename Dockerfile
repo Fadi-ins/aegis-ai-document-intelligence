@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 WORKDIR /srv
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
-RUN apt-get update && apt-get install -y --no-install-recommends libseccomp2 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends libseccomp2 zlib1g && rm -rf /var/lib/apt/lists/*
 COPY requirements*.txt ./
 RUN pip install --no-cache-dir -r requirements-postgres.txt && useradd --system --uid 10001 aegis
 COPY aegis ./aegis
