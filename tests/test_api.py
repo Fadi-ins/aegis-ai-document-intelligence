@@ -136,7 +136,7 @@ class ApiTest(unittest.TestCase):
             {"document_id": "a", "id": "p1", "page": 2, "filename": "pond.pdf",
              "body": "The hall is blue. The hall seats 14."},
             {"document_id": "b", "id": "p2", "page": 4, "filename": "park.pdf",
-             "body": "The park seats 90."},
+             "body": "The park has seats for 90."},
         ]
         for verified in ([2], [1]):
             calls = []
@@ -156,6 +156,33 @@ class ApiTest(unittest.TestCase):
                 else:
                     self.assertEqual(result["reason"], "invalid_sentence_id")
                     self.assertEqual(result["citations"], [])
+
+    def test_subject_and_sentence_filter_precedes_model_calls(self):
+        passages = [
+            {"document_id": "a", "id": "p1", "page": 2, "filename": "plans.pdf",
+             "body": "Harbor charges nine credits. The foyer has marble floors."},
+            {"document_id": "b", "id": "p2", "page": 1, "filename": "inlet.pdf",
+             "body": "Inlet charges eight credits."},
+        ]
+        seen = []
+        def reply(request):
+            messages = json.loads(request.content)["messages"]
+            sentences = json.loads(messages[-1]["content"])["sentences"]
+            seen.append([s["text"] for s in sentences])
+            return httpx.Response(200, json={"message": {"content": '{"ids":[1]}'}})
+
+        transport = httpx.MockTransport(reply)
+        self.assertEqual(answer("What does Ridge charge?", passages, "test", transport)["reason"],
+                         "subject_not_matched")
+        self.assertEqual(answer("What time is dinner?", passages, "test", transport)["reason"],
+                         "no_matching_sentences")
+        self.assertEqual(seen, [])
+        result = answer("What are Harbor charges?", passages, "test", transport)
+        self.assertEqual(seen, [["Harbor charges nine credits."]] * 2)
+        self.assertEqual(result["citations"][0]["document_id"], "a")
+        # The final selection must cover both explicitly requested subjects.
+        self.assertEqual(answer("Compare Harbor and Inlet charges.", passages, "test", transport)["reason"],
+                         "subject_not_matched")
 
     def test_parallel_upload_returns_one_document(self):
         from concurrent.futures import ThreadPoolExecutor

@@ -36,6 +36,19 @@ def keywords(question):
     return list(dict.fromkeys(w for w in words if w not in STOP and len(w) <= 48))[:24]
 
 
+def terms(text):
+    return set(re.findall(r"[^\W_]+", text.casefold()))
+
+
+def named_terms(question):
+    # A conservative English-language cue for explicit names and acronyms.
+    # Skip the initial capital of ordinary sentence case and one-letter pronouns.
+    words = re.findall(r"[^\W_]+", question)
+    return {word.casefold() for index, word in enumerate(words)
+            if (index or word.isupper()) and word[:1].isupper()
+            and len(word) > 1 and word.casefold() not in STOP}
+
+
 def cite(passage, quote):
     return {"document_id": passage["document_id"], "filename": passage["filename"],
             "page": passage["page"], "passage_id": passage["id"], "quote": quote}
@@ -69,15 +82,30 @@ def answer(question, passages, model, transport=None):
         return {"status": "matching_passages", "answer": None,
                 "citations": [cite(p, p["body"]) for p in passages]}
 
+    question_terms = set(keywords(question))
+    subjects = named_terms(question)
     candidates = []
     sources = {}
+    subject_matches = {}
     for passage in passages:
+        filename_terms = terms(passage["filename"].rsplit(".", 1)[0])
         for sentence in re.split(r"(?<=[.!?。！？])\s+", passage["body"], maxsplit=15):
-            if not sentence.strip():
+            sentence_terms = terms(sentence)
+            if not question_terms.intersection(sentence_terms):
+                continue
+            matches = subjects.intersection(filename_terms | sentence_terms)
+            if subjects and not matches:
                 continue
             index = len(candidates) + 1
             candidates.append({"id": index, "document": passage["filename"], "text": sentence})
             sources[index] = cite(passage, sentence)
+            subject_matches[index] = matches
+
+    matched_subjects = set().union(*subject_matches.values())
+    if subjects - matched_subjects:
+        return abstain("subject_not_matched")
+    if not candidates:
+        return abstain("no_matching_sentences")
 
     with httpx.Client(timeout=45, trust_env=False, transport=transport) as client:
         ids, error = choose(client, model, SELECT, question, candidates)
@@ -88,6 +116,8 @@ def answer(question, passages, model, transport=None):
         if error or not verified:
             return abstain(error or "verification_rejected")
 
+    if subjects - set().union(*(subject_matches[i] for i in verified)):
+        return abstain("subject_not_matched")
     citations = [sources[i] for i in verified]
     return {"status": "quoted_answer",
             "answer": "\n".join(f'{c["quote"]} [{i}]' for i, c in enumerate(citations, 1)),

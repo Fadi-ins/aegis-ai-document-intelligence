@@ -75,6 +75,18 @@ form("ask", async () => {
   return () => {
     const result = el("result");
     result.append(node("h3", {matching_passages:"Matching passages",quoted_answer:"Cited answer",insufficient_evidence:"Insufficient evidence"}[data.status]));
+    if (data.status === "insufficient_evidence") {
+      const reasons = {
+        no_matching_passages: "Your search found no matching passages in the selected documents.",
+        no_matching_sentences: "No sentence in the retrieved passages matched your question’s terms.",
+        subject_not_matched: "The available evidence could not be matched to every named subject in your question.",
+        no_sentence_selected: "The model found related text but chose no sentence as an answer.",
+        verification_rejected: "The model checked its proposed quotations and discarded them.",
+        invalid_model_response: "The model returned an unreadable selection.",
+        invalid_sentence_id: "The model selected a sentence outside the choices it was given."
+      };
+      if (Object.hasOwn(reasons, data.reason)) result.append(node("p", reasons[data.reason]));
+    }
     if (data.answer) result.append(node("p", data.answer));
     for (const c of data.citations) result.append(node("strong", c.filename + " · Page " + c.page),node("blockquote", c.quote));
     el("status").textContent = "";
