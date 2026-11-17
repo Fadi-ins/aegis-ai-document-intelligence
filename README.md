@@ -73,5 +73,8 @@ python -m unittest discover -v
 
 Run from an environment with `requirements.txt` installed. Native Linux also needs `libseccomp2`. Tests use temporary SQLite databases by default. Setting `TEST_DATABASE` to a disposable PostgreSQL DSN runs the same tests against PostgreSQL with `requirements-postgres.txt` installed. The suite uses real PDFs and a controlled Ollama HTTP transport to exercise quote selection, abstention and outages. The GitHub Actions workflow builds the container, runs both database profiles and checks a live HTTP request.
 
+## Evidence benchmark
+[See the measured results and reproduction commands](benchmarks/evidence50/README.md) for a 50-question benchmark across ten four-page PDFs. It measures whether the right page is retrieved, whether the selected quotes contain the labeled answer, and when the model declines questions that the selected documents cannot answer.
+
 ## Next milestone
-Build a labeled retrieval benchmark, then add pgvector embeddings alongside the existing full-text baseline. Measure evidence recall at five passages and citation relevance before introducing reranking or claim-level contradiction detection. The initial release includes a browser workspace, API and runnable demo.
+Compare the SQLite full-text baseline with hybrid retrieval on the frozen questions. Use a separate held-out collection before drawing conclusions about unfamiliar real-world PDFs.
