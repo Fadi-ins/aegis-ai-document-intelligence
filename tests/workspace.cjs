@@ -17,6 +17,9 @@ async function run() {
     await page.getByText("Find evidence").click();
     await page.locator("#result strong").filter({hasText:"Page 2"}).first().waitFor();
     await page.locator("blockquote").filter({hasText:"45 days"}).first().waitFor();
+    await page.locator("#question").fill("zeppelins");
+    await page.getByText("Find evidence").click();
+    await page.getByText("Your search found no matching passages in the selected documents.").waitFor();
     await page.getByRole("button", {name:"Lock workspace", exact:true}).click();
     await page.getByRole("button", {name:"Unlock workspace", exact:true}).waitFor();
   } finally { await browser.close(); }

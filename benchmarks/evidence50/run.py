@@ -10,6 +10,7 @@ import secrets
 import sqlite3
 import tempfile
 import textwrap
+from collections import Counter
 from contextlib import ExitStack
 from importlib.metadata import version
 from unittest.mock import patch
@@ -76,7 +77,7 @@ def query(client, question, ids):
     result = response.json()
     citations = [{"document": Path(c["filename"]).stem, "page": c["page"], "quote": c["quote"]}
                  for c in result["citations"]]
-    return result["status"], citations
+    return result["status"], citations, result.get("reason")
 
 
 def summarize(rows, with_model):
@@ -116,7 +117,7 @@ def run(args):
     sources, cases = load_suite()
     metadata = {
         "model": model_info(args.model) if args.model else None,
-        "backend": "SQLite FTS5", "sqlite": sqlite3.sqlite_version,
+        "selector": "verified_sentence_ids", "backend": "SQLite FTS5", "sqlite": sqlite3.sqlite_version,
         "python": platform.python_version(), "pypdf": version("pypdf"),
         "input_sha256": {name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()
                          for name in ("corpus.json", "questions.jsonl")},
@@ -151,21 +152,28 @@ def run(args):
 
         for case in cases:
             scope = [ids[name] for name in case["scope"]]
-            _, hits = query(retrieval, case["question"], scope)
+            _, hits, _ = query(retrieval, case["question"], scope)
             gold = case["gold"]
             rank = next((i for i, hit in enumerate(hits, 1) if gold and
                          (hit["document"], hit["page"]) == (gold["document"], gold["page"])), None)
             row = {"id": case["id"], "answerable": bool(gold), "rank": rank,
                    "retrieved": [[hit["document"], hit["page"]] for hit in hits]}
             if selector:
-                status, quotes = query(selector, case["question"], scope)
+                status, quotes, reason = query(selector, case["question"], scope)
                 for quote in quotes:
                     quote["relevant"] = bool(gold and quote["document"] == gold["document"]
                                              and quote["page"] == gold["page"] and gold["span"] in quote["quote"])
-                row.update(status=status, selected=quotes,
+                row.update(status=status, reason=reason, selected=quotes,
                            supported=bool(quotes) and all(q["relevant"] for q in quotes))
             rows.append(row)
-    return {"metadata": metadata, "metrics": summarize(rows, bool(args.model)), "cases": rows}
+    report = {"metadata": metadata, "metrics": summarize(rows, bool(args.model)), "cases": rows}
+    if args.model:
+        report["abstention_reasons"] = {
+            name: dict(Counter(row["reason"] for row in rows
+                               if row["answerable"] == answerable and row["status"] == "insufficient_evidence"))
+            for name, answerable in (("answerable", True), ("unanswerable", False))
+        }
+    return report
 
 
 def main():
