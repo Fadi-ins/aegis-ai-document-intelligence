@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - aegis/answers.py
       - benchmarks/evidence50/run.py
       - benchmarks/evidence50/corpus.json
       - benchmarks/evidence50/questions.jsonl
@@ -13,10 +14,14 @@ permissions:
 
 jobs:
   evaluate:
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [1.5b, 7b]
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     env:
-      MODEL: qwen2.5:1.5b
+      MODEL: qwen2.5:${{ matrix.size }}
       OLLAMA_HOST: 127.0.0.1:11434
       OLLAMA_NO_CLOUD: "1"
     steps:
@@ -47,6 +52,6 @@ jobs:
           python3 -c 'import json; print(json.dumps(json.load(open("evidence50-output/report.json")), separators=(",", ":")))'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: evidence50
+          name: evidence50-${{ matrix.size }}
           path: evidence50-output
           if-no-files-found: error

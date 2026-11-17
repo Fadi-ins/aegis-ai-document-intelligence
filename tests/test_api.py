@@ -11,6 +11,7 @@ import httpx
 from fastapi.testclient import TestClient
 from pypdf import PdfWriter
 
+from aegis.answers import answer
 from aegis.api import make_app
 from aegis.demo import sample_pdf
 from aegis.gateway import MAX_UPLOAD
@@ -80,7 +81,7 @@ class ApiTest(unittest.TestCase):
 
     def test_unanswerable_and_empty_scope(self):
         doc = self.upload().json()["id"]
-        self.assertEqual(self.query(doc, question="zeppelins").json()["status"], "insufficient_evidence")
+        self.assertEqual(self.query(doc, question="zeppelins").json()["reason"], "no_matching_passages")
         self.assertEqual(self.query().status_code, 422)
 
     def test_oversize_and_chunked_body(self):
@@ -104,20 +105,56 @@ class ApiTest(unittest.TestCase):
 
     def test_model_contract_and_abstention(self):
         doc = self.upload().json()["id"]
-        for source, quote, expected in [
-            (1, "The archive retention period is 45 days.", "quoted_answer"),
-            (1, "The archive retention period is 80 days.", "insufficient_evidence"),
-            (4, "45 days", "insufficient_evidence")]:
+        for replies, reason in [
+            ([[1], [1]], None),
+            ([[]], "no_sentence_selected"),
+            ([[4]], "invalid_sentence_id"),
+            ([[1], []], "verification_rejected"),
+            ([[1], [4]], "invalid_sentence_id"),
+            ([[True]], "invalid_model_response"),
+        ]:
+            responses = iter(replies)
             def reply(request):
                 self.assertEqual(str(request.url), "http://127.0.0.1:11434/api/chat")
-                payload = {"evidence": [{"source": source, "quote": quote}]}
+                payload = {"ids": next(responses)}
                 return httpx.Response(200, json={"message": {"content": json.dumps(payload)}})
-            with TestClient(make_app(self.store, self.keys, "test-model", httpx.MockTransport(reply))) as client:
+            with self.subTest(replies=replies), TestClient(
+                    make_app(self.store, self.keys, "test-model", httpx.MockTransport(reply))) as client:
                 result = self.query(doc, client=client).json()
-                self.assertEqual(result["status"], expected)
-                if expected == "quoted_answer":
+                if reason is None:
+                    self.assertEqual(result["status"], "quoted_answer")
                     self.assertEqual(result["citations"][0]["page"], 2)
+                    self.assertEqual(result["citations"][0]["quote"], "The archive retention period is 45 days.")
                 else:
+                    self.assertEqual(result["reason"], reason)
+                    self.assertEqual(result["status"], "insufficient_evidence")
+                    self.assertEqual(result["citations"], [])
+                self.assertEqual(list(responses), [])
+
+    def test_verifier_can_only_keep_proposed_source_sentences(self):
+        passages = [
+            {"document_id": "a", "id": "p1", "page": 2, "filename": "pond.pdf",
+             "body": "The hall is blue. The hall seats 14."},
+            {"document_id": "b", "id": "p2", "page": 4, "filename": "park.pdf",
+             "body": "The park seats 90."},
+        ]
+        for verified in ([2], [1]):
+            calls = []
+            def reply(request):
+                messages = json.loads(request.content)["messages"]
+                sentences = json.loads(messages[-1]["content"])["sentences"]
+                calls.append([item["id"] for item in sentences])
+                ids = [2, 3] if len(calls) == 1 else verified
+                return httpx.Response(200, json={"message": {"content": json.dumps({"ids": ids})}})
+
+            with self.subTest(verified=verified):
+                result = answer("How many seats are in the hall?", passages, "test", httpx.MockTransport(reply))
+                self.assertEqual(calls, [[1, 2, 3], [2, 3]])
+                if verified == [2]:
+                    self.assertEqual(result["citations"], [{"document_id": "a", "filename": "pond.pdf",
+                                     "page": 2, "passage_id": "p1", "quote": "The hall seats 14."}])
+                else:
+                    self.assertEqual(result["reason"], "invalid_sentence_id")
                     self.assertEqual(result["citations"], [])
 
     def test_parallel_upload_returns_one_document(self):
