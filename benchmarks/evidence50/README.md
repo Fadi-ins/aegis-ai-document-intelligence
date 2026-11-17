@@ -23,6 +23,8 @@ Retrieval returned at least one passage for every unanswerable question. The mod
 
 **Example of a retrieval miss.** For `pearl-4`, the question asks where the induction for new helpers takes place. The PDF uses the phrase “volunteer orientation.” The full-text search returned no passages. This case can be used to test whether semantic retrieval improves recall; the mixed answers above can be used to test quote selection separately.
 
+The [second independent CPU run](https://github.com/Fadi-ins/aegis-ai-document-intelligence/actions/runs/44102540684) used the same model digest and input files. Retrieval again ranked the right page first for 26/40 questions and in the top five for 36/40. The model selected 15/34 relevant quotes (44.1%), returned exclusively relevant quotes for 7/40 answerable questions (17.5%), and declined 7/10 unanswerable questions (70%). It also declined 24/40 answerable questions (60%). These two runs show observed variation, not a statistical confidence interval. [Inspect the repeat report](results/qwen2.5-1.5b-repeat.json).
+
 ## What the questions test
 
 The corpus contains five pairs of fictional organizations: two libraries, rehearsal studios, markets, archives, and repair cafes. Each pair has similar policies with different names, numbers, days, or locations. Each question searches five or six documents, or 20 to 24 pages. The model sees only the question and retrieved passages.
