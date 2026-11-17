@@ -1,0 +1,52 @@
+name: Document evidence benchmark
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - benchmarks/evidence50/run.py
+      - benchmarks/evidence50/corpus.json
+      - benchmarks/evidence50/questions.jsonl
+      - .github/workflows/evidence-benchmark.yml
+
+permissions:
+  contents: read
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      MODEL: qwen2.5:1.5b
+      OLLAMA_HOST: 127.0.0.1:11434
+      OLLAMA_NO_CLOUD: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install project requirements
+        run: |
+          python3 -m venv "$RUNNER_TEMP/bench-venv"
+          "$RUNNER_TEMP/bench-venv/bin/pip" install -r requirements.txt
+      - name: Start a local CPU model
+        working-directory: ${{ runner.temp }}
+        run: |
+          curl --fail --location --retry 3 --output ollama.tar.zst \
+            https://github.com/ollama/ollama/releases/download/v0.40.16/ollama-linux-amd64.tar.zst
+          echo '87bfafb2acbc89b2e6a1be0a9043de6aa75fb450696f86bc426e65fc448f788d  ollama.tar.zst' | sha256sum -c -
+          mkdir ollama-dist
+          tar --zstd -xf ollama.tar.zst -C ollama-dist --exclude='*cuda*' --exclude='*vulkan*'
+          rm ollama.tar.zst
+          ollama-dist/bin/ollama serve > ollama.log 2>&1 &
+          curl --fail --retry 12 --retry-connrefused --retry-delay 1 "http://$OLLAMA_HOST/api/version"
+          ollama-dist/bin/ollama pull "$MODEL"
+      - name: Evaluate all 50 questions
+        run: |
+          mkdir -p evidence50-output
+          "$RUNNER_TEMP/bench-venv/bin/python" -m benchmarks.evidence50.run --model "$MODEL" \
+            --pdf-dir evidence50-output/pdfs --output evidence50-output/report.json
+          python3 -c 'import json; print(json.dumps(json.load(open("evidence50-output/report.json")), separators=(",", ":")))'
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: evidence50
+          path: evidence50-output
+          if-no-files-found: error

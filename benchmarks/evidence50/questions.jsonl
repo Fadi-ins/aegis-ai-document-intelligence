@@ -1,0 +1,50 @@
+{"id": "lark-1", "scope": ["amber", "cedar", "juniper", "lark", "opal", "wren"], "question": "How long is a Lark atlas loan?", "gold": {"document": "lark", "page": 1, "span": "14 days"}}
+{"id": "lark-2", "scope": ["amber", "cedar", "juniper", "lark", "opal", "wren"], "question": "How can a Lark borrower extend a loan without visiting?", "gold": {"document": "lark", "page": 2, "span": "by telephone"}}
+{"id": "lark-3", "scope": ["amber", "cedar", "juniper", "lark", "opal", "wren"], "question": "Where does Lark send a request to mend a book?", "gold": {"document": "lark", "page": 3, "span": "binding desk"}}
+{"id": "lark-4", "scope": ["amber", "cedar", "juniper", "lark", "opal", "wren"], "question": "What does Lark charge if I lose my reader card?", "gold": {"document": "lark", "page": 4, "span": "6 credits"}}
+{"id": "lark-5", "scope": ["amber", "cedar", "juniper", "lark", "opal", "wren"], "question": "What does Lark charge for an overdue atlas?", "gold": null}
+{"id": "wren-1", "scope": ["birch", "elm", "lark", "maple", "pearl", "wren"], "question": "When is a borrowed Wren atlas due?", "gold": {"document": "wren", "page": 1, "span": "21 days"}}
+{"id": "wren-2", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "Can I ask for more time to keep what I borrowed?", "gold": {"document": "wren", "page": 2, "span": "online form"}}
+{"id": "wren-3", "scope": ["birch", "elm", "lark", "maple", "pearl", "wren"], "question": "Where should Wren staff take a damaged book?", "gold": {"document": "wren", "page": 3, "span": "conservation room"}}
+{"id": "wren-4", "scope": ["birch", "elm", "lark", "maple", "pearl", "wren"], "question": "How much does a new card cost after a Wren card is lost?", "gold": {"document": "wren", "page": 4, "span": "9 credits"}}
+{"id": "wren-5", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "What does Lark charge for a replacement library card?", "gold": null}
+{"id": "juniper-1", "scope": ["amber", "cedar", "juniper", "lark", "maple", "opal"], "question": "How long does Juniper hold an unpaid booking?", "gold": {"document": "juniper", "page": 1, "span": "36 hours"}}
+{"id": "juniper-2", "scope": ["amber", "cedar", "juniper", "lark", "maple", "opal"], "question": "Where can a band pick up its Juniper room key?", "gold": {"document": "juniper", "page": 2, "span": "west kiosk"}}
+{"id": "juniper-3", "scope": ["amber", "cedar", "juniper", "lark", "maple", "opal"], "question": "How early must I cancel at Juniper to receive credit?", "gold": {"document": "juniper", "page": 3, "span": "3 days"}}
+{"id": "juniper-4", "scope": ["amber", "cedar", "juniper", "lark", "maple", "opal"], "question": "How many musicians can rehearse in the Juniper piano room?", "gold": {"document": "juniper", "page": 4, "span": "8 performers"}}
+{"id": "juniper-5", "scope": ["amber", "cedar", "juniper", "lark", "maple", "opal"], "question": "How much cash is the Juniper piano deposit?", "gold": null}
+{"id": "maple-1", "scope": ["birch", "elm", "juniper", "maple", "pearl", "wren"], "question": "When does an unpaid Maple reservation expire?", "gold": {"document": "maple", "page": 1, "span": "12 hours"}}
+{"id": "maple-2", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "Where do we pick up the key before band practice?", "gold": {"document": "maple", "page": 2, "span": "north booth"}}
+{"id": "maple-3", "scope": ["birch", "elm", "juniper", "maple", "pearl", "wren"], "question": "How far ahead must a Maple band cancel to receive credit?", "gold": {"document": "maple", "page": 3, "span": "5 days"}}
+{"id": "maple-4", "scope": ["birch", "elm", "juniper", "maple", "pearl", "wren"], "question": "What is the performer limit in the Maple piano room?", "gold": {"document": "maple", "page": 4, "span": "11 performers"}}
+{"id": "maple-5", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "Where do Juniper performers collect their keys?", "gold": null}
+{"id": "amber-1", "scope": ["amber", "birch", "cedar", "juniper", "lark", "opal"], "question": "By what time must Amber vendors finish unloading?", "gold": {"document": "amber", "page": 1, "span": "07:40"}}
+{"id": "amber-2", "scope": ["amber", "birch", "cedar", "juniper", "lark", "opal"], "question": "Where would an Amber vendor find a replacement stall sign?", "gold": {"document": "amber", "page": 2, "span": "linen shed"}}
+{"id": "amber-3", "scope": ["amber", "birch", "cedar", "juniper", "lark", "opal"], "question": "How long after inspection does Amber take to return the bond?", "gold": {"document": "amber", "page": 3, "span": "8 business days"}}
+{"id": "amber-4", "scope": ["amber", "birch", "cedar", "juniper", "lark", "opal"], "question": "Who handles a damaged vendor table at Amber?", "gold": {"document": "amber", "page": 4, "span": "setup captain"}}
+{"id": "amber-5", "scope": ["amber", "birch", "cedar", "juniper", "lark", "opal"], "question": "What is the amount of the Amber stall bond?", "gold": null}
+{"id": "birch-1", "scope": ["amber", "birch", "elm", "maple", "pearl", "wren"], "question": "What is the Birch unloading deadline?", "gold": {"document": "birch", "page": 1, "span": "08:15"}}
+{"id": "birch-2", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "Where can a seller get another placard?", "gold": {"document": "birch", "page": 2, "span": "clock shed"}}
+{"id": "birch-3", "scope": ["amber", "birch", "elm", "maple", "pearl", "wren"], "question": "How soon after inspection does Birch refund its stall bond?", "gold": {"document": "birch", "page": 3, "span": "4 business days"}}
+{"id": "birch-4", "scope": ["amber", "birch", "elm", "maple", "pearl", "wren"], "question": "Whom should a Birch stallholder tell about a damaged table?", "gold": {"document": "birch", "page": 4, "span": "yard steward"}}
+{"id": "birch-5", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "By what time must Amber vendors finish unloading?", "gold": null}
+{"id": "cedar-1", "scope": ["amber", "cedar", "elm", "juniper", "lark", "opal"], "question": "How long are Cedar visitor slips retained?", "gold": {"document": "cedar", "page": 1, "span": "18 months"}}
+{"id": "cedar-2", "scope": ["amber", "cedar", "elm", "juniper", "lark", "opal"], "question": "What paperwork does Cedar require for a map reproduction?", "gold": {"document": "cedar", "page": 2, "span": "blue worksheet"}}
+{"id": "cedar-3", "scope": ["amber", "cedar", "elm", "juniper", "lark", "opal"], "question": "How many folders may a Cedar reader consult together?", "gold": {"document": "cedar", "page": 3, "span": "3 folders"}}
+{"id": "cedar-4", "scope": ["amber", "cedar", "elm", "juniper", "lark", "opal"], "question": "Which day does Cedar review digitization requests?", "gold": {"document": "cedar", "page": 4, "span": "Tuesdays"}}
+{"id": "cedar-5", "scope": ["amber", "cedar", "elm", "juniper", "lark", "opal"], "question": "What is the maximum scan resolution at Cedar?", "gold": null}
+{"id": "elm-1", "scope": ["birch", "cedar", "elm", "maple", "pearl", "wren"], "question": "When do Elm visitor slips reach the end of retention?", "gold": {"document": "elm", "page": 1, "span": "6 months"}}
+{"id": "elm-2", "scope": ["birch", "cedar", "elm", "maple", "pearl", "wren"], "question": "Which worksheet is used for map copies at Elm?", "gold": {"document": "elm", "page": 2, "span": "green worksheet"}}
+{"id": "elm-3", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "How many files can I have at my seat together?", "gold": {"document": "elm", "page": 3, "span": "2 folders"}}
+{"id": "elm-4", "scope": ["birch", "cedar", "elm", "maple", "pearl", "wren"], "question": "On which weekday does Elm consider a digitization request?", "gold": {"document": "elm", "page": 4, "span": "Fridays"}}
+{"id": "elm-5", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "What day does Cedar review digitization requests?", "gold": null}
+{"id": "opal-1", "scope": ["amber", "cedar", "juniper", "lark", "opal", "pearl"], "question": "How long is one Opal repair appointment?", "gold": {"document": "opal", "page": 1, "span": "35 minutes"}}
+{"id": "opal-2", "scope": ["amber", "cedar", "juniper", "lark", "opal", "pearl"], "question": "Which marker identifies unfinished work at Opal?", "gold": {"document": "opal", "page": 2, "span": "silver tag"}}
+{"id": "opal-3", "scope": ["amber", "cedar", "juniper", "lark", "opal", "pearl"], "question": "How long will Opal keep something its owner has not picked up?", "gold": {"document": "opal", "page": 3, "span": "16 days"}}
+{"id": "opal-4", "scope": ["amber", "cedar", "juniper", "lark", "opal", "pearl"], "question": "Where does an Opal volunteer attend orientation?", "gold": {"document": "opal", "page": 4, "span": "east loft"}}
+{"id": "opal-5", "scope": ["amber", "cedar", "juniper", "lark", "opal", "pearl"], "question": "Does Opal reimburse a visitor for replacement parts?", "gold": null}
+{"id": "pearl-1", "scope": ["birch", "elm", "maple", "opal", "pearl", "wren"], "question": "How much time is reserved for one Pearl repair appointment?", "gold": {"document": "pearl", "page": 1, "span": "50 minutes"}}
+{"id": "pearl-2", "scope": ["birch", "elm", "maple", "opal", "pearl", "wren"], "question": "What tag does Pearl attach to unfinished repairs?", "gold": {"document": "pearl", "page": 2, "span": "copper tag"}}
+{"id": "pearl-3", "scope": ["birch", "elm", "maple", "opal", "pearl", "wren"], "question": "When does the holding period end for an unclaimed item at Pearl?", "gold": {"document": "pearl", "page": 3, "span": "24 days"}}
+{"id": "pearl-4", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "Where is the induction for new helpers?", "gold": {"document": "pearl", "page": 4, "span": "river annex"}}
+{"id": "pearl-5", "scope": ["birch", "elm", "maple", "pearl", "wren"], "question": "How long are Opal repair appointments?", "gold": null}

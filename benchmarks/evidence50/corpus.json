@@ -1,0 +1,92 @@
+{
+  "lark": {
+    "title": "Lark branch library",
+    "pages": [
+      "Readers may keep a Lark atlas for 14 days. The loan desk records the due date on a yellow slip.",
+      "Renewals at Lark are available by telephone. Returning a book is also possible at the street hatch.",
+      "Lark repair requests go to the binding desk. Each request includes a shelf mark and a short description.",
+      "Lark charges 6 credits for a replacement library card. Updating a mailing address is free."
+    ]
+  },
+  "wren": {
+    "title": "Wren branch library",
+    "pages": [
+      "A Wren atlas is due after 21 days. Periodicals must stay in the reading room.",
+      "Wren renewals require the online form. Desk staff can look up the original loan number.",
+      "Books needing repair at Wren travel to the conservation room. Place a red slip inside the cover.",
+      "At Wren, a replacement library card costs 9 credits. The old card is removed from the active list."
+    ]
+  },
+  "juniper": {
+    "title": "Juniper rehearsal studio",
+    "pages": [
+      "Juniper holds an unpaid booking for 36 hours. After that the room returns to the calendar.",
+      "Juniper performers collect keys from the west kiosk. The studio door has no key dispenser.",
+      "A Juniper cancellation qualifies for credit with 3 days of notice. An exchange uses the original booking number.",
+      "The Juniper piano room admits 8 performers. Instrument cases must stay beneath the benches."
+    ]
+  },
+  "maple": {
+    "title": "Maple rehearsal studio",
+    "pages": [
+      "Maple keeps an unpaid reservation for 12 hours. The coordinator releases unused slots each morning.",
+      "Maple room keys await collection at the north booth. A reservation name is needed for pickup.",
+      "Maple grants cancellation credit with 5 days of notice. The credit remains attached to the booking account.",
+      "The Maple piano room admits 11 performers. Large cases belong on the marked shelf."
+    ]
+  },
+  "amber": {
+    "title": "Amber market stall guide",
+    "pages": [
+      "Amber vendors finish unloading by 07:40. Shoppers enter through a different gate.",
+      "At Amber, spare stall signs are stored in the linen shed. The map board shows the shed location.",
+      "Amber refunds a stall bond within 8 business days after inspection. The finance clerk records the transfer.",
+      "Amber vendors report a broken table to the setup captain. Folded tables belong on the rack."
+    ]
+  },
+  "birch": {
+    "title": "Birch market stall guide",
+    "pages": [
+      "Birch vendors must unload by 08:15. Empty carts line up along the wall.",
+      "Spare Birch stall signs are kept in the clock shed. A vendor can request one during setup.",
+      "The Birch stall bond is returned within 4 business days after inspection. Keep the inspection receipt.",
+      "At Birch, broken tables are reported to the yard steward. Leave the inventory label attached."
+    ]
+  },
+  "cedar": {
+    "title": "Cedar archive procedures",
+    "pages": [
+      "Cedar keeps visitor slips for 18 months. The slips are filed by visit date.",
+      "Cedar map copies are requested on the blue worksheet. The catalogue reference goes on the top line.",
+      "The Cedar reading room allows 3 folders on one desk. Return each folder before requesting a fourth.",
+      "Cedar digitization requests are reviewed on Tuesdays. Staff record the decision in the request book."
+    ]
+  },
+  "elm": {
+    "title": "Elm archive procedures",
+    "pages": [
+      "Elm retains visitor slips for 6 months. Paper slips are arranged by visit date.",
+      "For an Elm map copy, submit the green worksheet. Staff return incomplete submissions to the reader.",
+      "The Elm reading room permits 2 folders per desk. All other folders stay on the trolley.",
+      "Elm digitization requests receive review on Fridays. Completed reviews appear in the request book."
+    ]
+  },
+  "opal": {
+    "title": "Opal repair cafe",
+    "pages": [
+      "An Opal repair appointment lasts 35 minutes. Check in at the welcome table before taking a seat.",
+      "Opal labels unfinished items with a silver tag. The tracking number is copied to the visitor slip.",
+      "At Opal, uncollected items stay for 16 days. The clerk records the intake date on the label.",
+      "Opal schedules volunteer orientation in the east loft. New volunteers receive the tool checklist there."
+    ]
+  },
+  "pearl": {
+    "title": "Pearl repair cafe",
+    "pages": [
+      "Each Pearl repair appointment lasts 50 minutes. The waiting list is held at the welcome table.",
+      "Pearl identifies unfinished items with a copper tag. The owner receives a matching claim slip.",
+      "Pearl stores uncollected items for 24 days. The counter ledger lists the date each item arrived.",
+      "Pearl holds volunteer orientation in the river annex. Checklists are distributed at the first session."
+    ]
+  }
+}
