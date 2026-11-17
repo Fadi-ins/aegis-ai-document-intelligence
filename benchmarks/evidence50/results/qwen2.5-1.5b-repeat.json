@@ -1,0 +1,1655 @@
+{
+  "metadata": {
+    "model": {
+      "tag": "qwen2.5:1.5b",
+      "digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+      "ollama": "0.40.16"
+    },
+    "backend": "SQLite FTS5",
+    "sqlite": "3.45.1",
+    "python": "3.12.3",
+    "pypdf": "7.1.0",
+    "input_sha256": {
+      "corpus.json": "267d6ce2ab2dddf70b392832999304a2f58b9ccd25124d81962f769389c350d6",
+      "questions.jsonl": "307ed2c5f9dee72af6bc4715dfb2b471757fe464ab850f48a46453afc6485dab"
+    }
+  },
+  "metrics": {
+    "gold_page_at_1": [
+      26,
+      40
+    ],
+    "gold_page_at_5": [
+      36,
+      40
+    ],
+    "retrieval_no_match_on_unanswerable": [
+      0,
+      10
+    ],
+    "supported_answer_on_answerable": [
+      7,
+      40
+    ],
+    "relevant_selected_quotes": [
+      15,
+      34
+    ],
+    "abstention_on_unanswerable": [
+      7,
+      10
+    ],
+    "abstention_on_answerable": [
+      24,
+      40
+    ]
+  },
+  "cases": [
+    {
+      "id": "lark-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "lark",
+          1
+        ],
+        [
+          "lark",
+          4
+        ],
+        [
+          "lark",
+          2
+        ],
+        [
+          "lark",
+          3
+        ],
+        [
+          "wren",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "lark-2",
+      "answerable": true,
+      "rank": 4,
+      "retrieved": [
+        [
+          "wren",
+          2
+        ],
+        [
+          "lark",
+          1
+        ],
+        [
+          "lark",
+          4
+        ],
+        [
+          "lark",
+          2
+        ],
+        [
+          "lark",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "lark-3",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "lark",
+          2
+        ],
+        [
+          "lark",
+          3
+        ],
+        [
+          "cedar",
+          4
+        ],
+        [
+          "lark",
+          4
+        ],
+        [
+          "lark",
+          1
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "lark",
+          "page": 3,
+          "quote": "Lark repair requests go to the binding desk.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "lark-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "lark",
+          4
+        ],
+        [
+          "wren",
+          4
+        ],
+        [
+          "lark",
+          2
+        ],
+        [
+          "lark",
+          3
+        ],
+        [
+          "lark",
+          1
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "lark",
+          "page": 4,
+          "quote": "Lark charges 6 credits for a replacement library card.",
+          "relevant": true
+        },
+        {
+          "document": "wren",
+          "page": 4,
+          "quote": "At Wren, a replacement library card costs 9 credits. The old card is removed from the active list.",
+          "relevant": false
+        },
+        {
+          "document": "lark",
+          "page": 2,
+          "quote": "Renewals at Lark are available by telephone.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "lark-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "lark",
+          1
+        ],
+        [
+          "lark",
+          4
+        ],
+        [
+          "lark",
+          2
+        ],
+        [
+          "lark",
+          3
+        ],
+        [
+          "wren",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "wren-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "wren",
+          1
+        ],
+        [
+          "lark",
+          1
+        ],
+        [
+          "wren",
+          2
+        ],
+        [
+          "wren",
+          3
+        ],
+        [
+          "wren",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "wren-2",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "wren",
+          2
+        ],
+        [
+          "birch",
+          3
+        ],
+        [
+          "birch",
+          2
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "wren-3",
+      "answerable": true,
+      "rank": 3,
+      "retrieved": [
+        [
+          "wren",
+          2
+        ],
+        [
+          "wren",
+          1
+        ],
+        [
+          "wren",
+          3
+        ],
+        [
+          "wren",
+          4
+        ],
+        [
+          "elm",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "wren-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "wren",
+          4
+        ],
+        [
+          "wren",
+          1
+        ],
+        [
+          "wren",
+          2
+        ],
+        [
+          "wren",
+          3
+        ],
+        [
+          "lark",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "wren-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "wren",
+          4
+        ],
+        [
+          "wren",
+          1
+        ],
+        [
+          "wren",
+          2
+        ],
+        [
+          "wren",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "juniper-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "juniper",
+          1
+        ],
+        [
+          "juniper",
+          3
+        ],
+        [
+          "juniper",
+          4
+        ],
+        [
+          "juniper",
+          2
+        ],
+        [
+          "maple",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "juniper-2",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "juniper",
+          2
+        ],
+        [
+          "juniper",
+          4
+        ],
+        [
+          "juniper",
+          1
+        ],
+        [
+          "juniper",
+          3
+        ],
+        [
+          "maple",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "juniper-3",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "juniper",
+          3
+        ],
+        [
+          "juniper",
+          4
+        ],
+        [
+          "maple",
+          3
+        ],
+        [
+          "juniper",
+          2
+        ],
+        [
+          "juniper",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "juniper-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "juniper",
+          4
+        ],
+        [
+          "maple",
+          4
+        ],
+        [
+          "juniper",
+          1
+        ],
+        [
+          "juniper",
+          2
+        ],
+        [
+          "juniper",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "juniper",
+          "page": 4,
+          "quote": "The Juniper piano room admits 8 performers.",
+          "relevant": true
+        },
+        {
+          "document": "maple",
+          "page": 4,
+          "quote": "The Maple piano room admits 11 performers.",
+          "relevant": false
+        },
+        {
+          "document": "juniper",
+          "page": 1,
+          "quote": "Juniper holds an unpaid booking for 36 hours.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "juniper-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "juniper",
+          4
+        ],
+        [
+          "juniper",
+          2
+        ],
+        [
+          "juniper",
+          1
+        ],
+        [
+          "maple",
+          4
+        ],
+        [
+          "juniper",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "maple-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "maple",
+          1
+        ],
+        [
+          "maple",
+          2
+        ],
+        [
+          "maple",
+          4
+        ],
+        [
+          "maple",
+          3
+        ],
+        [
+          "juniper",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "maple-2",
+      "answerable": true,
+      "rank": null,
+      "retrieved": [
+        [
+          "birch",
+          1
+        ],
+        [
+          "wren",
+          2
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "maple-3",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "maple",
+          3
+        ],
+        [
+          "maple",
+          4
+        ],
+        [
+          "maple",
+          1
+        ],
+        [
+          "maple",
+          2
+        ],
+        [
+          "elm",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "maple-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "maple",
+          4
+        ],
+        [
+          "juniper",
+          4
+        ],
+        [
+          "maple",
+          2
+        ],
+        [
+          "maple",
+          1
+        ],
+        [
+          "maple",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "maple-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "maple",
+          2
+        ],
+        [
+          "maple",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "amber-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "amber",
+          1
+        ],
+        [
+          "amber",
+          4
+        ],
+        [
+          "birch",
+          1
+        ],
+        [
+          "amber",
+          3
+        ],
+        [
+          "amber",
+          2
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "amber",
+          "page": 1,
+          "quote": "Amber vendors finish unloading by 07:40.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "amber-2",
+      "answerable": true,
+      "rank": 3,
+      "retrieved": [
+        [
+          "birch",
+          2
+        ],
+        [
+          "amber",
+          3
+        ],
+        [
+          "amber",
+          2
+        ],
+        [
+          "amber",
+          1
+        ],
+        [
+          "amber",
+          4
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "amber",
+          "page": 2,
+          "quote": "At Amber, spare stall signs are stored in the linen shed.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "amber-3",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "amber",
+          3
+        ],
+        [
+          "birch",
+          3
+        ],
+        [
+          "amber",
+          1
+        ],
+        [
+          "amber",
+          4
+        ],
+        [
+          "amber",
+          2
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "amber-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "amber",
+          4
+        ],
+        [
+          "birch",
+          2
+        ],
+        [
+          "amber",
+          1
+        ],
+        [
+          "amber",
+          3
+        ],
+        [
+          "amber",
+          2
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "amber-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "amber",
+          3
+        ],
+        [
+          "amber",
+          2
+        ],
+        [
+          "birch",
+          3
+        ],
+        [
+          "amber",
+          1
+        ],
+        [
+          "amber",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "birch-1",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "amber",
+          1
+        ],
+        [
+          "birch",
+          1
+        ],
+        [
+          "birch",
+          4
+        ],
+        [
+          "birch",
+          3
+        ],
+        [
+          "birch",
+          2
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "birch",
+          "page": 1,
+          "quote": "Birch vendors must unload by 08:15.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "birch-2",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "wren",
+          2
+        ],
+        [
+          "birch",
+          2
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "birch",
+          "page": 2,
+          "quote": "A vendor can request one during setup.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "birch-3",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "birch",
+          3
+        ],
+        [
+          "amber",
+          3
+        ],
+        [
+          "birch",
+          2
+        ],
+        [
+          "birch",
+          1
+        ],
+        [
+          "birch",
+          4
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "birch",
+          "page": 3,
+          "quote": "Birch stall bond is returned within 4 business days after inspection.",
+          "relevant": true
+        },
+        {
+          "document": "amber",
+          "page": 3,
+          "quote": "Amber refunds a stall bond within 8 business days after inspection.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "birch-4",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "birch",
+          1
+        ],
+        [
+          "birch",
+          4
+        ],
+        [
+          "birch",
+          3
+        ],
+        [
+          "birch",
+          2
+        ],
+        [
+          "pearl",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "birch-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "birch",
+          1
+        ],
+        [
+          "wren",
+          1
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "birch",
+          "page": 1,
+          "quote": "Birch market stall guide Page 1 Birch vendors must unload by 08:15. Empty carts line up along the wall.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "cedar-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "cedar",
+          1
+        ],
+        [
+          "elm",
+          1
+        ],
+        [
+          "cedar",
+          4
+        ],
+        [
+          "cedar",
+          2
+        ],
+        [
+          "cedar",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "cedar",
+          "page": 1,
+          "quote": "Cedar keeps visitor slips for 18 months. The slips are filed by visit date.",
+          "relevant": true
+        },
+        {
+          "document": "elm",
+          "page": 1,
+          "quote": "Elm retains visitor slips for 6 months. Paper slips are arranged by visit date.",
+          "relevant": false
+        },
+        {
+          "document": "cedar",
+          "page": 4,
+          "quote": "Cedar digitization requests are reviewed on Tuesdays. Staff record the decision in the request book.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "cedar-2",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "cedar",
+          2
+        ],
+        [
+          "cedar",
+          1
+        ],
+        [
+          "cedar",
+          4
+        ],
+        [
+          "cedar",
+          3
+        ],
+        [
+          "elm",
+          2
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "cedar-3",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "cedar",
+          3
+        ],
+        [
+          "elm",
+          3
+        ],
+        [
+          "elm",
+          2
+        ],
+        [
+          "lark",
+          1
+        ],
+        [
+          "cedar",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "cedar-4",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "elm",
+          4
+        ],
+        [
+          "cedar",
+          4
+        ],
+        [
+          "cedar",
+          1
+        ],
+        [
+          "cedar",
+          2
+        ],
+        [
+          "cedar",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "cedar",
+          "page": 4,
+          "quote": "Cedar digitization requests are reviewed on Tuesdays.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "cedar-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "cedar",
+          1
+        ],
+        [
+          "cedar",
+          4
+        ],
+        [
+          "cedar",
+          2
+        ],
+        [
+          "cedar",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "elm-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "elm",
+          1
+        ],
+        [
+          "cedar",
+          1
+        ],
+        [
+          "elm",
+          4
+        ],
+        [
+          "elm",
+          2
+        ],
+        [
+          "elm",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "elm-2",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "cedar",
+          2
+        ],
+        [
+          "elm",
+          2
+        ],
+        [
+          "elm",
+          4
+        ],
+        [
+          "elm",
+          1
+        ],
+        [
+          "elm",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "elm",
+          "page": 2,
+          "quote": "For an Elm map copy, submit the green worksheet.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "elm-3",
+      "answerable": true,
+      "rank": null,
+      "retrieved": [
+        [
+          "wren",
+          2
+        ],
+        [
+          "birch",
+          2
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "elm-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "elm",
+          4
+        ],
+        [
+          "cedar",
+          4
+        ],
+        [
+          "elm",
+          1
+        ],
+        [
+          "elm",
+          2
+        ],
+        [
+          "elm",
+          3
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "elm-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "elm",
+          4
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "elm",
+          "page": 4,
+          "quote": "Elm digitization requests receive review on Fridays.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "opal-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "opal",
+          1
+        ],
+        [
+          "pearl",
+          1
+        ],
+        [
+          "opal",
+          4
+        ],
+        [
+          "opal",
+          2
+        ],
+        [
+          "opal",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "opal",
+          "page": 1,
+          "quote": "Opal repair appointment lasts 35 minutes.",
+          "relevant": true
+        },
+        {
+          "document": "pearl",
+          "page": 1,
+          "quote": "Pearl repair appointment lasts 50 minutes.",
+          "relevant": false
+        },
+        {
+          "document": "opal",
+          "page": 4,
+          "quote": "Opal schedules volunteer orientation in the east loft.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "opal-2",
+      "answerable": true,
+      "rank": 2,
+      "retrieved": [
+        [
+          "pearl",
+          2
+        ],
+        [
+          "opal",
+          2
+        ],
+        [
+          "opal",
+          4
+        ],
+        [
+          "opal",
+          1
+        ],
+        [
+          "opal",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "opal",
+          "page": 2,
+          "quote": "Opal labels unfinished items with a silver tag. The tracking number is copied to the visitor slip.",
+          "relevant": true
+        }
+      ],
+      "supported": true
+    },
+    {
+      "id": "opal-3",
+      "answerable": true,
+      "rank": null,
+      "retrieved": [
+        [
+          "juniper",
+          2
+        ],
+        [
+          "pearl",
+          2
+        ],
+        [
+          "opal",
+          4
+        ],
+        [
+          "opal",
+          2
+        ],
+        [
+          "opal",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "opal-4",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "opal",
+          4
+        ],
+        [
+          "pearl",
+          4
+        ],
+        [
+          "opal",
+          2
+        ],
+        [
+          "opal",
+          1
+        ],
+        [
+          "opal",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "opal",
+          "page": 4,
+          "quote": "Opal schedules volunteer orientation in the east loft.",
+          "relevant": true
+        },
+        {
+          "document": "pearl",
+          "page": 4,
+          "quote": "Pearl holds volunteer orientation in the river annex.",
+          "relevant": false
+        },
+        {
+          "document": "opal",
+          "page": 2,
+          "quote": "Opal labels unfinished items with a silver tag.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "opal-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "opal",
+          2
+        ],
+        [
+          "opal",
+          4
+        ],
+        [
+          "opal",
+          1
+        ],
+        [
+          "opal",
+          3
+        ],
+        [
+          "lark",
+          4
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "pearl-1",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "pearl",
+          1
+        ],
+        [
+          "opal",
+          1
+        ],
+        [
+          "pearl",
+          2
+        ],
+        [
+          "pearl",
+          4
+        ],
+        [
+          "pearl",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "pearl",
+          "page": 1,
+          "quote": "Each Pearl repair appointment lasts 50 minutes.",
+          "relevant": true
+        },
+        {
+          "document": "opal",
+          "page": 1,
+          "quote": "An Opal repair appointment lasts 35 minutes.",
+          "relevant": false
+        },
+        {
+          "document": "pearl",
+          "page": 2,
+          "quote": "Pearl identifies unfinished items with a copper tag.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "pearl-2",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "pearl",
+          2
+        ],
+        [
+          "opal",
+          2
+        ],
+        [
+          "pearl",
+          4
+        ],
+        [
+          "pearl",
+          3
+        ],
+        [
+          "pearl",
+          1
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "pearl",
+          "page": 2,
+          "quote": "Pearl identifies unfinished items with a copper tag.",
+          "relevant": true
+        },
+        {
+          "document": "opal",
+          "page": 2,
+          "quote": "Opal labels unfinished items with a silver tag.",
+          "relevant": false
+        },
+        {
+          "document": "pearl",
+          "page": 4,
+          "quote": "Pearl holds volunteer orientation in the river annex.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    },
+    {
+      "id": "pearl-3",
+      "answerable": true,
+      "rank": 1,
+      "retrieved": [
+        [
+          "pearl",
+          3
+        ],
+        [
+          "pearl",
+          2
+        ],
+        [
+          "pearl",
+          4
+        ],
+        [
+          "pearl",
+          1
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "pearl-4",
+      "answerable": true,
+      "rank": null,
+      "retrieved": [],
+      "status": "insufficient_evidence",
+      "selected": [],
+      "supported": false
+    },
+    {
+      "id": "pearl-5",
+      "answerable": false,
+      "rank": null,
+      "retrieved": [
+        [
+          "pearl",
+          1
+        ],
+        [
+          "pearl",
+          2
+        ],
+        [
+          "pearl",
+          4
+        ],
+        [
+          "pearl",
+          3
+        ],
+        [
+          "wren",
+          3
+        ]
+      ],
+      "status": "quoted_answer",
+      "selected": [
+        {
+          "document": "pearl",
+          "page": 1,
+          "quote": "Pearl repair cafe Page 1 Each Pearl repair appointment lasts 50 minutes.",
+          "relevant": false
+        }
+      ],
+      "supported": false
+    }
+  ]
+}
